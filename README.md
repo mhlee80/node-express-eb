@@ -244,3 +244,7 @@ Upload Complete.
 # 글자색 적용 확인
 # /public/stylesheets/style.css 접근 가능 확인
 ```
+
+# Database 연결
+1. [데이터베이스 추가하기](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/create-deploy-nodejs.rds.html)
+2. MySQLWorkbench로 연결하려면 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가한다.
