@@ -248,3 +248,7 @@ Upload Complete.
 # Database 연결
 1. [데이터베이스 추가하기](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/create-deploy-nodejs.rds.html)
 2. MySQLWorkbench로 연결하려면 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가한다.
+
+# Future Work
+1. 통합환경에서 configuration으로 database 설치
+2. 통합환경에서 snapshot으로 부터 database 복원
