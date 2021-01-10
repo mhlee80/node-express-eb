@@ -254,11 +254,12 @@ Upload Complete.
 1. EB 외부 데이터베이스 추가
 1. MySQLWorkbench로 연결하려면 RDS의 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가한다.
 1. 데이터베이스에서 EB의 접근을 허용하도록 인바운드 설정을 추가: RDS의 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가하되 '소스'를 AWS EB Load Balancer의 SG로 설정한다.
+1. 나중에 종료할때에는 위의 SG 설정을 삭제해야 한다. 왜냐하면 데이터베이스의 SG가 EB의 SG를 의존하기 때문. 데이터베이스가 EB를 의존하고 있기 때문에 함부로 EB가 삭제 될 수 없는 것이다.
+성으로 포함하고 있기 때문에, 데이터베이스에서 의존성을 인하여 종료 불가 메시지가 표시된다.
 1. EB에서 데이터베이스에 접근할 수 있도록 인스턴스 보안그룹 설정 추가: EB -> 해당 환경 -> '구성' -> '인스턴스' -> '인스턴스 보안 그룹'에서 윗 단계의 SG을 체크 하고 적용한다.
 1. EB 인스턴스 내부 코드에서 DB에 접속하기 위한 환경 변수를 설정: 
 ```
 eb setenv RDS_HOSTNAME=${MY_RDS_HOST} RDS_USERNAME=${MY_RDS_USERNAME} RDS_PASSWORD=${MY_RDS_PASSWORD} RDS_PORT=${MY_RDS_PORT}
-
 ```
 # Future Work
 1. 통합환경에서 configuration으로 database 설치
