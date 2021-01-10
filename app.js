@@ -14,6 +14,11 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
+  console.log(process.env.RDS_HOSTNAME)
+  console.log(process.env.RDS_USERNAME)
+  console.log(process.env.RDS_PASSWORD)
+  console.log(process.env.RDS_PORT)
+  
   if (err) {
     console.error('Database connection failed: ' + err.stack);
     return;

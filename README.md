@@ -245,10 +245,21 @@ Upload Complete.
 # /public/stylesheets/style.css 접근 가능 확인
 ```
 
-# Database 연결
+# Database 연결(EB 통합형) - 개발 환경
 1. [데이터베이스 추가하기](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/create-deploy-nodejs.rds.html)
-2. MySQLWorkbench로 연결하려면 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가한다.
+1. MySQLWorkbench로 연결하려면 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가한다.
 
+# Database 연결(EB 분리형) - 프로덕션 환경
+1. [가이드](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/rds-external-defaultvpc.html)
+1. EB 외부 데이터베이스 추가
+1. MySQLWorkbench로 연결하려면 RDS의 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가한다.
+1. 데이터베이스에서 EB의 접근을 허용하도록 인바운드 설정을 추가: RDS의 '보안 그룹' -> '인바운드 규칙'에 'MySQL/Aurora'에 대한 항목을 추가하되 '소스'를 AWS EB Load Balancer의 SG로 설정한다.
+1. EB에서 데이터베이스에 접근할 수 있도록 인스턴스 보안그룹 설정 추가: EB -> 해당 환경 -> '구성' -> '인스턴스' -> '인스턴스 보안 그룹'에서 윗 단계의 SG을 체크 하고 적용한다.
+1. EB 인스턴스 내부 코드에서 DB에 접속하기 위한 환경 변수를 설정: 
+```
+eb setenv RDS_HOSTNAME=${MY_RDS_HOST} RDS_USERNAME=${MY_RDS_USERNAME} RDS_PASSWORD=${MY_RDS_PASSWORD} RDS_PORT=${MY_RDS_PORT}
+
+```
 # Future Work
 1. 통합환경에서 configuration으로 database 설치
 2. 통합환경에서 snapshot으로 부터 database 복원
